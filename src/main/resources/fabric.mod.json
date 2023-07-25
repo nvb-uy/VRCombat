@@ -1,0 +1,33 @@
+{
+	"schemaVersion": 1,
+	"id": "vr-combat",
+	"version": "${version}",
+	"name": "VR Combat",
+	"description": "A compatibility mod that allows Vivecraft's combat to work with Better Combat.",
+	"authors": [
+		"ElocinDev"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/nvb-uy/VRCombat"
+	},
+	"license": "MIT",
+	"icon": "assets/vr-combat/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"client": [
+			"elocindev.vrcombat.fabric.VRCombat"
+		]
+	},
+	"mixins": [
+		"vr-combat.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.21",
+		"minecraft": "~1.19.2",
+		"java": ">=17",
+		"fabric-api": "*",
+		"bettercombat": "*",
+		"vivecraft": "*"
+	}
+}
