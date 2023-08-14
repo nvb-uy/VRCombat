@@ -4,10 +4,10 @@ import net.fabricmc.api.ClientModInitializer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.vivecraft.VRState;
 
 import elocindev.vrcombat.fabric.config.ConfigBuilder;
 import elocindev.vrcombat.fabric.config.ConfigEntries;
+import org.vivecraft.client_vr.VRState;
 
 public class VRCombat implements ClientModInitializer {
     public static final String MODID = "vr-combat";
@@ -20,7 +20,7 @@ public class VRCombat implements ClientModInitializer {
 		CONFIG = ConfigBuilder.loadConfig();
 		LOGGER.info("VRCombat Config Initialized!");
 
-		isVR = VRState.checkVR();
+		isVR = VRState.vrEnabled;
 		if (isVR) {
 			LOGGER.info("VRCombat detected Vivecraft VR Mode!");
 		} else {
