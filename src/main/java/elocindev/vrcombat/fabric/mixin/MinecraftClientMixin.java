@@ -2,7 +2,9 @@ package elocindev.vrcombat.fabric.mixin;
 
 import net.bettercombat.client.BetterCombatClient;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.entity.Entity;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -11,7 +13,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import elocindev.vrcombat.fabric.VRCombat;
+import org.vivecraft.api_beta.VivecraftAPI;
+import org.vivecraft.api_beta.client.VivecraftClientAPI;
+import org.vivecraft.client.VRPlayersClient;
 import org.vivecraft.client.VivecraftVRMod;
+import org.vivecraft.client.gui.VivecraftClickEvent;
 import org.vivecraft.client_vr.ClientDataHolderVR;
 import org.vivecraft.client_vr.VRData;
 import org.vivecraft.client_vr.VRState;
@@ -21,8 +27,11 @@ import org.vivecraft.client_vr.settings.VRSettings;
 import org.vivecraft.fabric.VivecraftMod;
 
 @Mixin(MinecraftClient.class)
-public class MinecraftClientMixin {
+public abstract class MinecraftClientMixin {
 	@Shadow @Nullable public ClientWorld world;
+
+	@Shadow @Nullable public Entity cameraEntity;
+
 
 	@Inject(at = @At("HEAD"), method = "tick")
 	// This is a hacky solution, but according to Daedelus, the only way to do it is by overriding the boolean every tick
@@ -31,9 +40,13 @@ public class MinecraftClientMixin {
 		//VR hot-swapping is really tedious to work with, this solution checks if VR is enabled,
 		//And if the player is also currently IN VR, so that the mod comes back when a hotswap to desktop occurs.
 		if (ClientDataHolderVR.getInstance().vrSettings.vrEnabled &&
-				ClientDataHolderVR.getInstance().vr != null &&
-				ClientDataHolderVR.getInstance().vr.isHMDTracking()) {
+				VivecraftClientAPI.getInstance() != null &&
+				VivecraftClientAPI.getInstance().isVrActive()) {
 			BetterCombatClient.ENABLED = false;
+		}
+		else {
+			// RE ENABLE WHEN VR IS OFF. SUPER IMPORTANT!!
+			BetterCombatClient.ENABLED = true;
 		}
 	}
 }
