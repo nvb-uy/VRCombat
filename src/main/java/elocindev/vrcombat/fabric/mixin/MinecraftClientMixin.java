@@ -2,7 +2,6 @@ package elocindev.vrcombat.fabric.mixin;
 
 import net.bettercombat.client.BetterCombatClient;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import org.jetbrains.annotations.Nullable;
@@ -12,19 +11,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import elocindev.vrcombat.fabric.VRCombat;
-import org.vivecraft.api_beta.VivecraftAPI;
 import org.vivecraft.api_beta.client.VivecraftClientAPI;
-import org.vivecraft.client.VRPlayersClient;
-import org.vivecraft.client.VivecraftVRMod;
-import org.vivecraft.client.gui.VivecraftClickEvent;
 import org.vivecraft.client_vr.ClientDataHolderVR;
-import org.vivecraft.client_vr.VRData;
-import org.vivecraft.client_vr.VRState;
-import org.vivecraft.client_vr.gameplay.VRPlayer;
-import org.vivecraft.client_vr.provider.VRRenderer;
-import org.vivecraft.client_vr.settings.VRSettings;
-import org.vivecraft.fabric.VivecraftMod;
 
 @Mixin(MinecraftClient.class)
 public abstract class MinecraftClientMixin {
